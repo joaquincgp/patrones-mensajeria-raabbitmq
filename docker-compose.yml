@@ -1,0 +1,13 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: semana8-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin123
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbitmq_management load_definitions \"/etc/rabbitmq/definitions.json\""
+    volumes:
+      - ./docs/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro

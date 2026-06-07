@@ -1,0 +1,118 @@
+{
+  "rabbit_version": "3.13.0",
+  "users": [
+    {
+      "name": "admin",
+      "password_hash": "jqH0kSA9+i9asIpZ3s/UiRknl1mCxTQV2yYlEyFbzliX/4nK",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "billing.exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "orders.exchange",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "invalid.exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "queues": [
+    {
+      "name": "billing.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "notification.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "analytics.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "invalid-message.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "billing.exchange",
+      "vhost": "/",
+      "destination": "billing.queue",
+      "destination_type": "queue",
+      "routing_key": "billing.generate",
+      "arguments": {}
+    },
+    {
+      "source": "orders.exchange",
+      "vhost": "/",
+      "destination": "notification.queue",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    },
+    {
+      "source": "orders.exchange",
+      "vhost": "/",
+      "destination": "analytics.queue",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    },
+    {
+      "source": "invalid.exchange",
+      "vhost": "/",
+      "destination": "invalid-message.queue",
+      "destination_type": "queue",
+      "routing_key": "invalid.message",
+      "arguments": {}
+    }
+  ]
+}
