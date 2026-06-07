@@ -1,6 +1,6 @@
 # Semana 8 - Patrones basicos de mensajeria con RabbitMQ
 
-Sistema academico en Java 17, Spring Boot 3.3.5, Apache Camel 4.8.0 y RabbitMQ 3.13 Management para demostrar patrones basicos de mensajeria en una tienda en linea.
+Sistema academico para la materia de Integración de Sistemas desarrollado en Java 17, Spring Boot 3.3.5, Apache Camel 4.8.0 y RabbitMQ 3.13 Management para demostrar patrones basicos de mensajeria en una tienda en linea.
 
 ## Patrones implementados
 
@@ -68,5 +68,3 @@ Para demostrar dos consumidores Point-to-Point compitiendo por `billing.queue`:
 ```bash
 mvn spring-boot:run -Dspring-boot.run.arguments="--app.consumers.billing.second-instance-enabled=true"
 ```
-
-La guia completa de demostracion esta en [docs/informe-demostracion.md](docs/informe-demostracion.md).
